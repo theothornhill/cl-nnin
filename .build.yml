@@ -1,0 +1,14 @@
+image: archlinux
+packages:
+  - sbcl
+sources:
+  - https://git.sr.ht/~theothornhill/lisp-ci
+  - https://git.sr.ht/~theothornhill/cl-nnin
+tasks:
+  - setup: |
+      ./lisp-ci/lisp-ci.sh
+      mv ~/cl-nnin ~/quicklisp/local-projects/
+      cd ~/quicklisp/local-projects/cl-nnin
+  - test: |
+      cd ~/quicklisp/local-projects/cl-nnin
+      ./test.sh
