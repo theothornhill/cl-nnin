@@ -4,6 +4,7 @@
 (defparameter k2-nums '(5 4 3 2 7 6 5 4 3 2))
 
 (defun k1 (&rest args)
+  ;; Returns NIL when the value is 10
   (let ((rest (mod (apply #'+ (mapcar #'* k1-nums args)) 11)))
     (unless (= rest 1)
       (if (zerop rest)
@@ -11,6 +12,7 @@
           (- 11 rest)))))
 
 (defun k2 (&rest args)
+  ;; Returns NIL when the value is 10
   (let ((rest (mod (apply #'+ (mapcar #'* k2-nums args)) 11)))
     (unless (= rest 1)
       (if (zerop rest)
@@ -38,7 +40,13 @@
           (mod (truncate number 10) 10)
           (mod number 10))))
 
+(defmacro if-let ((var test-form) then-form &optional else-form)
+  `(let ((,var ,test-form))
+     (if ,var ,then-form ,else-form)))
+
 (defun nnin ()
+  "Generate a Norwegian National Identity Number, using randomized values.
+Should be used only to mock up test data."
   (let ((nnin (append (birth-date) (individual-numbers))))
     (if-let (k1 (apply #'k1 nnin))
       (let ((x (append nnin (list k1))))

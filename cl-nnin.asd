@@ -3,7 +3,6 @@
   :author "Theodor Thornhill <theo@thornhill.no>"
   :licence "GPLv3"
   :version "0.0.1"
-  :depends-on (:alexandria)
   :components ((:module "src"
                 :components ((:file "package")
                              (:file "cl-nnin"))))
